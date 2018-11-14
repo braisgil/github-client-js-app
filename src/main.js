@@ -1,10 +1,18 @@
 import { clientId, clientSecret } from "../github.config.json";
 import Github from "./js/github";
 import UI from "./js/ui";
+import DataStorage from "./js/datastorage";
 import "./main.scss";
 
 const github = new Github(clientId, clientSecret);
 const ui = new UI();
+const dataStorage = new DataStorage();
+
+if (dataStorage.checkUser()) {
+    console.log('Data');
+    ui.showProfile(JSON.parse(sessionStorage.getItem('userData')));
+    ui.showRepos(JSON.parse(sessionStorage.getItem('userRepos')));
+}
 
 const searchForm = document.getElementById('searchForm');
 searchForm.addEventListener('submit', function(e) {
@@ -18,6 +26,7 @@ searchForm.addEventListener('submit', function(e) {
                     ui.showMessage('User Found', 'alert alert-success mt-2 col-md-12');
                     ui.showProfile(data.userDataJSON);
                     ui.showRepos(data.userReposJSON);
+                    dataStorage.addUser(data.userDataJSON, data.userReposJSON);
                 }
             }
         );
@@ -26,4 +35,6 @@ searchForm.addEventListener('submit', function(e) {
     }
     e.preventDefault();
 });
+
+
 
