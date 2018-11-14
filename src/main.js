@@ -10,8 +10,8 @@ const dataStorage = new DataStorage();
 
 if (dataStorage.checkUser()) {
     console.log('Data');
-    ui.showProfile(JSON.parse(localStorage.getItem('userData')));
-    ui.showRepos(JSON.parse(localStorage.getItem('userRepos')));
+    ui.showProfile(JSON.parse(sessionStorage.getItem('userData')));
+    ui.showRepos(JSON.parse(sessionStorage.getItem('userRepos')));
 }
 
 const searchForm = document.getElementById('searchForm');

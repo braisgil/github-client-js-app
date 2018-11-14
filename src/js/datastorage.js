@@ -1,11 +1,11 @@
 class DataStorage {
     addUser(user, repos) {
-        localStorage.clear();
-        localStorage.setItem('userData', JSON.stringify(user));
-        localStorage.setItem('userRepos', JSON.stringify(repos));
+        sessionStorage.clear();
+        sessionStorage.setItem('userData', JSON.stringify(user));
+        sessionStorage.setItem('userRepos', JSON.stringify(repos));
     }
     checkUser() {
-        if (localStorage.length > 0) {
+        if (sessionStorage.length > 0) {
             return true;
         }
     }
