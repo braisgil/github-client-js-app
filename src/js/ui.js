@@ -5,15 +5,27 @@ class UI {
     }
 
     showMessage(message, cssClass) {
-        const notification = document.createElement('div');
-        notification.className = cssClass;
-        notification.appendChild(document.createTextNode(message));
-        const targetContainer = document.querySelector('.row');
-        const profilePosition = document.querySelector('#userProfile');
-        targetContainer.insertBefore(notification, profilePosition);
-        setTimeout(function() {
-            notification.remove();
-        }, 3000);
+
+        function displayMessage() {
+            const notification = document.createElement('div');
+            notification.className = cssClass;
+            notification.id = 'messageBar';
+            notification.appendChild(document.createTextNode(message));
+            const targetContainer = document.querySelector('.row');
+            const profilePosition = document.querySelector('#userProfile');
+            targetContainer.insertBefore(notification, profilePosition);
+            setTimeout(function() {
+                notification.remove();
+            }, 3000);
+        }
+        const messageBar = document.getElementById('messageBar');
+        
+        if (messageBar !== null) {
+            messageBar.remove();
+            displayMessage();
+        } else {
+            displayMessage();
+        }
     }
 
     showProfile(user) {
