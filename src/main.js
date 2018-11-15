@@ -9,7 +9,6 @@ const ui = new UI();
 const dataStorage = new DataStorage();
 
 if (dataStorage.checkUser()) {
-    console.log('Data');
     ui.showProfile(JSON.parse(sessionStorage.getItem('userData')));
     ui.showRepos(JSON.parse(sessionStorage.getItem('userRepos')));
 }
@@ -23,10 +22,14 @@ searchForm.addEventListener('submit', function(e) {
                 if (data === undefined) {
                     ui.showMessage('User Not Found', 'alert alert-danger mt-2 col-md-12');
                 } else {
-                    ui.showMessage('User Found', 'alert alert-success mt-2 col-md-12');
-                    ui.showProfile(data.userDataJSON);
-                    ui.showRepos(data.userReposJSON);
-                    dataStorage.addUser(data.userDataJSON, data.userReposJSON);
+                    if(data.userDataJSON.id !== JSON.parse(sessionStorage.getItem('userData')).id) {
+                        ui.showMessage('User Found', 'alert alert-success mt-2 col-md-12');
+                        ui.showProfile(data.userDataJSON);
+                        ui.showRepos(data.userReposJSON);
+                        dataStorage.addUser(data.userDataJSON, data.userReposJSON);
+                    } else {
+                        ui.showMessage('User displayed already', 'alert alert-success mt-2 col-md-12');
+                    }
                 }
             }
         );
