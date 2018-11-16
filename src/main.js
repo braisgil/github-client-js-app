@@ -22,7 +22,12 @@ searchForm.addEventListener('submit', function(e) {
                 if (data === undefined) {
                     ui.showMessage('User Not Found', 'alert alert-danger mt-2 col-md-12');
                 } else {
-                    if(data.userDataJSON.id !== JSON.parse(sessionStorage.getItem('userData')).id) {
+                    if (JSON.parse(sessionStorage.getItem('userData') === null)) {
+                        ui.showMessage('User Found', 'alert alert-success mt-2 col-md-12');
+                        ui.showProfile(data.userDataJSON);
+                        ui.showRepos(data.userReposJSON);
+                        dataStorage.addUser(data.userDataJSON, data.userReposJSON);
+                    } else if(data.userDataJSON.id !== JSON.parse(sessionStorage.getItem('userData')).id) {
                         ui.showMessage('User Found', 'alert alert-success mt-2 col-md-12');
                         ui.showProfile(data.userDataJSON);
                         ui.showRepos(data.userReposJSON);
