@@ -18,14 +18,15 @@ class UI {
                 notification.remove();
             }, 3000);
         }
+
         const messageBar = document.getElementById('messageBar');
         
         if (messageBar !== null) {
             messageBar.remove();
-            displayMessage();
-        } else {
-            displayMessage();
         }
+        
+        displayMessage();
+
     }
 
     showProfile(user) {
